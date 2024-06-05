@@ -7,15 +7,15 @@ def split_pdf(input_pdf, output_folder):
         os.makedirs(output_folder)
 
     with open(input_pdf, "rb") as pdf_file:
-        reader = PyPDF2.PdfFileReader(pdf_file)
-        num_pages = reader.getNumPages()
+        reader = PyPDF2.PdfReader(pdf_file)
+        num_pages = len(reader.pages)
 
         for page_num in range(num_pages):
-            writer = PyPDF2.PdfFileWriter()
-            writer.addPage(reader.getPage(page_num))
+            writer = PyPDF2.PdfWriter()
+            writer.add_page(reader.pages[page_num])
 
-            output_folder = os.path.join(output_folder, f"page_{page_num + 1}.pdf")
-            with open(output_folder, "wb") as output_pdf:
+            output_pdf_path = os.path.join(output_folder, f"page_{page_num + 1}.pdf")
+            with open(output_pdf_path, "wb") as output_pdf:
                 writer.write(output_pdf)
 
             print(f"Page {page_num + 1} saved as {output_folder}")
