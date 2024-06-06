@@ -3,7 +3,7 @@ import os
 from splitter import split_pdf
 
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='../templates')
 
 UPLOAD_FOLDER = 'uploads'
 OUTPUT_FOLDER = 'output'
@@ -29,6 +29,7 @@ def index():
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(OUTPUT_FOLDER, filename)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
