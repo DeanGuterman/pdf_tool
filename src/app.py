@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, send_from_directory
 import os
+import shutil
+import atexit
 from splitter import split_pdf
 
 
@@ -29,6 +31,16 @@ def index():
 @app.route('/download/<filename>')
 def download_file(filename):
     return send_from_directory(OUTPUT_FOLDER, filename)
+
+
+def cleanup_folder():
+    if os.path.exists(UPLOAD_FOLDER):
+        shutil.rmtree(UPLOAD_FOLDER)
+    if os.path.exists(OUTPUT_FOLDER):
+        shutil.rmtree(OUTPUT_FOLDER)
+
+
+atexit.register(cleanup_folder)
 
 
 if __name__ == '__main__':
