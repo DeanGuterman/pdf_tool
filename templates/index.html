@@ -2,9 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial scale=1.0">
+    <title>PDF Splitter</title>
 </head>
 <body>
-
+    <h1>PDF Splitter</h1>
+    <form action="/" method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/pdf" required>
+        <button type="submit">Upload and Split</button>
+    </form>
+    <h2>Split Pages</h2>
+    <u1>
+        {% for file in files %}
+            <li><a href="{{ url_for('download_file', filename=file) }}">{{ file }}</a></li>
+        {% endfor %}
+    </u1>
 </body>
 </html>
