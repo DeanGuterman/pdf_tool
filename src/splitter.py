@@ -19,14 +19,3 @@ def split_pdf(input_pdf, output_folder):
                 writer.write(output_pdf)
 
             print(f"Page {page_num + 1} saved as {output_folder}")
-
-if __name__ == "__main__":
-    import argparse
-
-
-    parser = argparse.ArgumentParser(description='Split a pdf into individual pages')
-    parser.add_argument('input_pdf', help='Path to the input PDF file.')
-    parser.add_argument('output_folder', help='Folder to save the split PDF pages')
-
-    args = parser.parse_args()
-    split_pdf(args.input_pdf, args.output_folder)
