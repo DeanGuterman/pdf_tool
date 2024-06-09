@@ -7,15 +7,25 @@
 </head>
 <body>
     <h1>PDF Splitter</h1>
-    <form action="/" method="POST" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="application/pdf" required>
-        <button type="submit">Upload and Split</button>
+        <input type="hidden" name="split" value="split">
+        <input type="submit" value="Upload and Split PDF">
     </form>
-    <h2>Split Pages</h2>
-    <u1>
+
+    <h1>PDF Merger</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="application/pdf" multiple required>
+        <input type="hidden" name="merge" value="merge">
+        <input type="submit" value="Merge Pdfs">
+    </form>
+
+    <h2>Processed Files</h2>
+    <ul>
         {% for file in files %}
             <li><a href="{{ url_for('download_file', filename=file) }}" target="_blank">{{ file }}</a></li>
         {% endfor %}
-    </u1>
+    </ul>
+
 </body>
 </html>
