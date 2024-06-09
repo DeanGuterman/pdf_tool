@@ -6,6 +6,7 @@
     <title>PDF Splitter</title>
 </head>
 <body>
+    <!-- Pdf splitting form -->
     <h1>PDF Splitter</h1>
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="application/pdf" required>
@@ -13,6 +14,7 @@
         <input type="submit" value="Upload and Split PDF">
     </form>
 
+    <!-- Pdf merging form -->
     <h1>PDF Merger</h1>
     <form method="post" enctype="multipart/form-data">
         <input type="file" name="file" accept="application/pdf" multiple required>
@@ -20,6 +22,7 @@
         <input type="submit" value="Merge Pdfs">
     </form>
 
+    <!-- List of the processed files -->
     <h2>Processed Files</h2>
     <ul>
         {% for file in files %}
