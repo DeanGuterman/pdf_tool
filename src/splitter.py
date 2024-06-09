@@ -3,8 +3,10 @@ import os
 
 
 def split_pdf(input_pdf, output_folder):
-    if not os.path.exists(output_folder):
-        os.makedirs(output_folder)
+    for file in os.listdir(output_folder):
+        file_path = os.path.join(output_folder, file)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
 
     with open(input_pdf, "rb") as pdf_file:
         reader = PyPDF2.PdfReader(pdf_file)

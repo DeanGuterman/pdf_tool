@@ -1,14 +1,15 @@
-from flask import Flask, request, render_template, send_from_directory
+from flask import Flask, request, render_template, send_from_directory, redirect, url_for
 import os
 import shutil
 import atexit
 from splitter import split_pdf
+from merger import merge_pdfs
 
 
 app = Flask(__name__, template_folder='../templates')
 
-UPLOAD_FOLDER = 'uploads'
-OUTPUT_FOLDER = 'output'
+UPLOAD_FOLDER = '../uploads'
+OUTPUT_FOLDER = '../output'
 
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -18,14 +19,25 @@ if not os.path.exists(OUTPUT_FOLDER):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    print(request.method)
     if request.method == 'POST':
-        file = request.files['file']
-        if file:
-            file_path = os.path.join(UPLOAD_FOLDER, file.filename)
-            file.save(file_path)
-            split_pdf(file_path, OUTPUT_FOLDER)
-            return render_template('index.html', files=os.listdir(OUTPUT_FOLDER))
-    return render_template('index.html', files=[])
+        print(request.form)
+        if 'split' in request.form:
+            print("Split form submitted")
+            file = request.files['file']
+            if file:
+                file_path = os.path.join(UPLOAD_FOLDER, file.filename)
+                file.save(file_path)
+                split_pdf(file_path, OUTPUT_FOLDER)
+                return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
+        elif 'merge' in request.form:
+            print("Merge form submitted")
+            merge_pdfs(UPLOAD_FOLDER, OUTPUT_FOLDER)
+            return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
+
+    return render_template('index.html', files=os.listdir(OUTPUT_FOLDER))
+
+
 
 
 @app.route('/download/<filename>')
