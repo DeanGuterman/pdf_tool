@@ -1,5 +1,5 @@
 import os
-from PyPDF2 import PdfMerger
+from pypdf import PdfMerger
 from utils import clear_folder
 
 
