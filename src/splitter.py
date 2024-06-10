@@ -1,5 +1,6 @@
 import PyPDF2
 import os
+from src.utils import clear_folder
 
 
 def split_pdf(input_pdf, output_folder):
@@ -9,11 +10,7 @@ def split_pdf(input_pdf, output_folder):
     :param output_folder: The folder that should hold the new pdfs
     """
     # Clear the output folder
-    # TODO: CLEAN CODE THE REPEATS IN MERGER.PY
-    for file in os.listdir(output_folder):
-        file_path = os.path.join(output_folder, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+    clear_folder(output_folder)
 
     # Open the input pdf
     with open(input_pdf, "rb") as pdf_file:

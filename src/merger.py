@@ -1,5 +1,6 @@
 import os
 from PyPDF2 import PdfMerger
+from src.utils import clear_folder
 
 
 def merge_pdfs(input_folder, output_folder):
@@ -10,11 +11,7 @@ def merge_pdfs(input_folder, output_folder):
     """
 
     # Clear the output folder
-    # TODO: CLEAN CODE THE REPEATS IN SPLITTER.PY
-    for file in os.listdir(output_folder):
-        file_path = os.path.join(output_folder, file)
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+    clear_folder(output_folder)
 
     # Iterate through the pdfs in the input folder, while merging them into a merger
     merger = PdfMerger()
