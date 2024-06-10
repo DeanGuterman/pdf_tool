@@ -4,7 +4,7 @@ import shutil
 import atexit
 from splitter import split_pdf
 from merger import merge_pdfs
-
+from utils import cleanup_folders
 
 """
 Flask application for PDF processing
@@ -26,7 +26,6 @@ if not os.path.exists(OUTPUT_FOLDER):
 # The main page of the webpage
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    print(request.method)
     # Check if and what kind of form submit is it
     if request.method == 'POST':
         print(request.form)
@@ -55,14 +54,7 @@ def download_file(filename):
 
 
 # Delete the created folders
-def cleanup_folder():
-    if os.path.exists(UPLOAD_FOLDER):
-        shutil.rmtree(UPLOAD_FOLDER)
-    if os.path.exists(OUTPUT_FOLDER):
-        shutil.rmtree(OUTPUT_FOLDER)
-
-
-atexit.register(cleanup_folder)
+atexit.register(lambda: cleanup_folders([UPLOAD_FOLDER, OUTPUT_FOLDER]))
 
 
 if __name__ == '__main__':
