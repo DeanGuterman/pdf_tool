@@ -8,6 +8,7 @@ def split_pdf(input_pdf, output_folder):
     Splits a pdf into multiple pdfs, each containing one page
     :param input_pdf: The file to be split
     :param output_folder: The folder that should hold the new pdfs
+    :return: The output folder's path
     """
     # Clear the output folder
     clear_folder(output_folder)
@@ -21,9 +22,10 @@ def split_pdf(input_pdf, output_folder):
         for page_num in range(num_pages):
             writer = PdfWriter()
             writer.add_page(reader.pages[page_num])
-
-            output_pdf_path = os.path.join(output_folder, f"page_{page_num + 1}.pdf")
+            print(os.path.basename(input_pdf).split('.')[0])
+            output_pdf_path = os.path.join(output_folder, f"{os.path.basename(input_pdf).split('.')[0]}_page_{page_num + 1}.pdf")
             with open(output_pdf_path, "wb") as output_pdf:
                 writer.write(output_pdf)
 
             print(f"Page {page_num + 1} saved as {output_folder}")
+    return output_folder

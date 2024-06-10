@@ -8,6 +8,7 @@ def merge_pdfs(input_folder, output_folder):
     Merge multiple pdfs into a new singular pdf
     :param input_folder: The folder containing the pdfs to be merged
     :param output_folder: The folder that should hold the newly created pdf
+    :return: The newly created file's path
     """
 
     # Clear the output folder
@@ -23,3 +24,4 @@ def merge_pdfs(input_folder, output_folder):
     # Write the merger into the resulting pdf
     merger.write(output_file_path)
     merger.close()
+    return output_file_path
