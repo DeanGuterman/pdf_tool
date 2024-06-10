@@ -1,6 +1,5 @@
 from flask import Flask, request, render_template, send_from_directory, redirect, url_for
 import os
-import shutil
 import atexit
 from splitter import split_pdf
 from merger import merge_pdfs
@@ -53,7 +52,7 @@ def download_file(filename):
     return send_from_directory(OUTPUT_FOLDER, filename)
 
 
-# Delete the created folders
+# Delete the created folders, lambda is needed because atexit.register expects a function
 atexit.register(lambda: cleanup_folders([UPLOAD_FOLDER, OUTPUT_FOLDER]))
 
 
