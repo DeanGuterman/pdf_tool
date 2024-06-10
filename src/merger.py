@@ -1,6 +1,6 @@
 import os
 from PyPDF2 import PdfMerger
-from src.utils import clear_folder
+from utils import clear_folder
 
 
 def merge_pdfs(input_folder, output_folder):

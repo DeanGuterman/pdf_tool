@@ -1,6 +1,6 @@
 import PyPDF2
 import os
-from src.utils import clear_folder
+from utils import clear_folder
 
 
 def split_pdf(input_pdf, output_folder):
