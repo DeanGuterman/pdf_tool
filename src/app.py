@@ -3,7 +3,7 @@ import os
 import atexit
 from splitter import split_pdf
 from merger import merge_pdfs
-from utils import cleanup_folders
+from utils import delete_folders, clear_folder
 
 """
 Flask application for PDF processing
@@ -28,19 +28,24 @@ def index():
     # Check if and what kind of form submit is it
     if request.method == 'POST':
         print(request.form)
-        # If it's a pdf splitting form
-        if 'split' in request.form:
-            print("Split form submitted")
-            file = request.files['file']
+
+        for file in request.files.getlist('split_file') or request.files.getlist('merge_files'):
             if file:
                 file_path = os.path.join(UPLOAD_FOLDER, file.filename)
                 file.save(file_path)
-                split_pdf(file_path, OUTPUT_FOLDER)
-                return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
+
+        # If it's a pdf splitting form
+        if 'split' in request.form:
+            print("Split form submitted")
+            split_pdf(UPLOAD_FOLDER, OUTPUT_FOLDER)
+            clear_folder(UPLOAD_FOLDER)
+            return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
+
         # If it's a pdf merging form
         elif 'merge' in request.form:
             print("Merge form submitted")
             merge_pdfs(UPLOAD_FOLDER, OUTPUT_FOLDER)
+            clear_folder(UPLOAD_FOLDER)
             return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
 
     return render_template('index.html', files=os.listdir(OUTPUT_FOLDER))
@@ -53,7 +58,7 @@ def download_file(filename):
 
 
 # Delete the created folders, lambda is needed because atexit.register expects a function
-atexit.register(lambda: cleanup_folders([UPLOAD_FOLDER, OUTPUT_FOLDER]))
+atexit.register(lambda: delete_folders([UPLOAD_FOLDER, OUTPUT_FOLDER]))
 
 
 if __name__ == '__main__':

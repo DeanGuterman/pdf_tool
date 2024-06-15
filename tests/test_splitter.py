@@ -13,17 +13,16 @@ def setup_files(tmp_path):
     test_pdf = tmp_path / "test.pdf"
     writer = PdfWriter()
     writer.add_blank_page(width=72, height=72)
-    with open(test_pdf, "wb") as f:
+    with test_pdf.open("wb") as f:
         writer.write(f)
     return test_pdf
 
 
-def test_split(setup_files, tmp_path):
-    input_pdf = setup_files
-    output_dir = tmp_path / "output"
+def test_split(tmp_path, setup_files):
+    output_dir = tmp_path / "zoutput" # Need to fix this somehow, gotta make it last in folder
     output_dir.mkdir()
 
-    split_pdf(input_pdf, output_dir)
+    split_pdf(tmp_path, output_dir)
 
     output_files = os.listdir(output_dir)
     assert len(output_files) > 0, "No files were created in the output directory"

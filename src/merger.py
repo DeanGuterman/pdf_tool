@@ -1,5 +1,5 @@
 import os
-from pypdf import PdfMerger
+from pypdf import PdfWriter
 from utils import clear_folder
 
 
@@ -13,15 +13,14 @@ def merge_pdfs(input_folder, output_folder):
 
     # Clear the output folder
     clear_folder(output_folder)
-
-    # Iterate through the pdfs in the input folder, while merging them into a merger
-    merger = PdfMerger()
+    # Iterate through the pdfs in the input folder, while writing them into a single file
+    writer = PdfWriter()
     for item in os.listdir(input_folder):
         if item.endswith('.pdf'):
-            merger.append(os.path.join(input_folder, item))
+            writer.append(os.path.join(input_folder, item))
             print(f"File {item} merged")
     output_file_path = os.path.join(output_folder, 'merged.pdf')
     # Write the merger into the resulting pdf
-    merger.write(output_file_path)
-    merger.close()
+    writer.write(output_file_path)
+    writer.close()
     return output_file_path

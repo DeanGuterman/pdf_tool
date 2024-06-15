@@ -3,17 +3,20 @@ from pypdf import PdfReader, PdfWriter
 from utils import clear_folder
 
 
-def split_pdf(input_pdf, output_folder):
+def split_pdf(input_folder, output_folder):
     """
     Splits a pdf into multiple pdfs, each containing one page
-    :param input_pdf: The file to be split
+    :param input_folder: The folder that hold the file to be split
     :param output_folder: The folder that should hold the new pdfs
     :return: The output folder's path
     """
+
     # Clear the output folder
     clear_folder(output_folder)
 
+    input_pdf = os.path.join(input_folder, os.listdir(input_folder)[0])
     # Open the input pdf
+    print(input_pdf)
     with open(input_pdf, "rb") as pdf_file:
         reader = PdfReader(pdf_file)
         num_pages = len(reader.pages)

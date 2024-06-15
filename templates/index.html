@@ -9,7 +9,7 @@
     <!-- Pdf splitting form -->
     <h1>PDF Splitter</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="application/pdf" required>
+        <input type="file" name="split_file" accept="application/pdf" required>
         <input type="hidden" name="split" value="split">
         <input type="submit" value="Upload and Split PDF">
     </form>
@@ -17,7 +17,7 @@
     <!-- Pdf merging form -->
     <h1>PDF Merger</h1>
     <form method="post" enctype="multipart/form-data">
-        <input type="file" name="file" accept="application/pdf" multiple required>
+        <input type="file" name="merge_files" accept="application/pdf" multiple required>
         <input type="hidden" name="merge" value="merge">
         <input type="submit" value="Merge Pdfs">
     </form>

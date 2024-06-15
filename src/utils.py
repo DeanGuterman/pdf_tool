@@ -16,7 +16,7 @@ def clear_folder(folder_path):
     return len(os.listdir(folder_path))
 
 
-def cleanup_folders(folder_list):
+def delete_folders(folder_list):
     """
     Delete given folders
     :param folder_list: The folders to be deleted
