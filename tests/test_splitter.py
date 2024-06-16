@@ -29,7 +29,7 @@ def create_pdf(tmp_path):
     {"size": (144, 144), "num_pages": 4},
 ])
 def test_split(tmp_path, pdf_properties, create_pdf):
-    pdf_file = create_pdf(size=pdf_properties["size"], num_pages=pdf_properties["num_pages"])
+    create_pdf(size=pdf_properties["size"], num_pages=pdf_properties["num_pages"])
     output_dir = tmp_path / "_output"
     output_dir.mkdir()
 
