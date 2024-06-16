@@ -19,7 +19,7 @@ def setup_files(tmp_path):
 
 
 def test_split(tmp_path, setup_files):
-    output_dir = tmp_path / "zoutput" # Need to fix this somehow, gotta make it last in folder
+    output_dir = tmp_path / "_output" # Underscore (_) is so it shows up last in the folder
     output_dir.mkdir()
 
     split_pdf(tmp_path, output_dir)

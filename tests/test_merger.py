@@ -21,7 +21,7 @@ def setup_files(tmp_path):
 
 
 def test_merge(tmp_path, setup_files):
-    output_dir = tmp_path / "output"
+    output_dir = tmp_path / "_output"
     output_dir.mkdir()
 
     merge_pdfs(tmp_path, output_dir)
