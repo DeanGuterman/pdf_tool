@@ -7,26 +7,36 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../s
 
 from merger import merge_pdfs
 
+
 @pytest.fixture
-def setup_files(tmp_path):
-    test_files = []
-    for i in range(5):
-        test_pdf = tmp_path / f"test_{i}.pdf"
-        writer = PdfWriter()
-        writer.add_blank_page(width=72, height=72)
-        test_files.append(test_pdf)
-        with open(test_pdf, "wb") as f:
-            writer.write(f)
-    return test_files
+def create_test_pdfs(tmp_path):
+    def _create_test_pdfs(num_files=5, page_size=(72, 72)):
+        test_files = []
+        for i in range(num_files):
+            test_pdf = tmp_path / f"test_{i}.pdf"
+            writer = PdfWriter()
+            writer.add_blank_page(width=page_size[0], height=page_size[1])
+            with open(test_pdf, "wb") as f:
+                writer.write(f)
+            test_files.append(test_pdf)
+        return test_files
+    return _create_test_pdfs
 
 
-def test_merge(tmp_path, setup_files):
+@pytest.mark.parametrize("pdf_properties", [
+    {"num_files": 3, "page_size": (72, 72)},
+    {"num_files": 5, "page_size": (72, 72)},
+    {"num_files": 2, "page_size": (144, 144)},
+    {"num_files": 7, "page_size": (144, 144)},
+])
+def test_merge(tmp_path, pdf_properties, create_test_pdfs):
+    create_test_pdfs(num_files=pdf_properties["num_files"], page_size=pdf_properties["page_size"])
     output_dir = tmp_path / "_output"
     output_dir.mkdir()
 
     merge_pdfs(tmp_path, output_dir)
-    output_file = os.listdir(output_dir)[0]
+    output_files = os.listdir(output_dir)
 
-    print(f"merged file is: {output_file}")
     assert len(os.listdir(output_dir)) > 0, "No files were created in the output directory"
-    assert output_file.endswith('.pdf'), f"Unexpected file type found: {output_file}"
+    assert all(file.endswith('.pdf') for file in output_files), f"Unexpected file type found: {output_files}"
+

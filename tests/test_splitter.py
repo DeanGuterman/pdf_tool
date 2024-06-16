@@ -25,8 +25,8 @@ def create_pdf(tmp_path):
     {"size": (72, 72), "num_pages": 1},
     {"size": (72, 72), "num_pages": 2},
     {"size": (72, 72), "num_pages": 8},
-    {"size": (144, 144), "num_pages": 2},
-    {"size": (144, 144), "num_pages": 4},
+    {"size": (144, 144), "num_pages": 3},
+    {"size": (144, 144), "num_pages": 9},
 ])
 def test_split(tmp_path, pdf_properties, create_pdf):
     create_pdf(size=pdf_properties["size"], num_pages=pdf_properties["num_pages"])

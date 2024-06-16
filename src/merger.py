@@ -17,7 +17,6 @@ def merge_pdfs(input_folder, output_folder):
     for item in os.listdir(input_folder):
         if item.endswith('.pdf'):
             writer.append(os.path.join(input_folder, item))
-            print(f"File {item} merged")
     output_file_path = os.path.join(output_folder, 'merged.pdf')
     # Write the merger into the resulting pdf
     writer.write(output_file_path)
