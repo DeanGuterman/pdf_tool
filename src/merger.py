@@ -10,7 +10,6 @@ def merge_pdfs(input_folder, output_folder):
     :param output_folder: The folder that should hold the newly created pdf
     :return: The newly created file's path
     """
-
     # Clear the output folder
     clear_folder(output_folder)
     # Iterate through the pdfs in the input folder, while writing them into a single file
@@ -23,5 +22,6 @@ def merge_pdfs(input_folder, output_folder):
     # Write the merger into the resulting pdf
     writer.write(output_file_path)
     writer.close()
+
     clear_folder(input_folder)
     return output_file_path

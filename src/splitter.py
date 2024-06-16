@@ -16,13 +16,12 @@ def split_pdf(input_folder, output_folder):
 
     input_pdf = os.path.join(input_folder, os.listdir(input_folder)[0])
     # Open the input pdf
-    print(input_pdf)
     with open(input_pdf, "rb") as pdf_file:
+        print(input_pdf)
         reader = PdfReader(pdf_file)
-        num_pages = len(reader.pages)
 
         # Iterate through the input pdf and write each page to a new, separate pdf
-        for page_num in range(num_pages):
+        for page_num in range(len(reader.pages)):
             writer = PdfWriter()
             writer.add_page(reader.pages[page_num])
             print(os.path.basename(input_pdf).split('.')[0])
