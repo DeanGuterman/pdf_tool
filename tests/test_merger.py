@@ -10,7 +10,7 @@ from merger import merge_pdfs
 @pytest.fixture
 def setup_files(tmp_path):
     test_files = []
-    for i in range(2):
+    for i in range(5):
         test_pdf = tmp_path / f"test_{i}.pdf"
         writer = PdfWriter()
         writer.add_blank_page(width=72, height=72)
