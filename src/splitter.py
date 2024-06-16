@@ -31,4 +31,5 @@ def split_pdf(input_folder, output_folder):
                 writer.write(output_pdf)
 
             print(f"Page {page_num + 1} saved as {output_folder}")
+    clear_folder(input_folder)
     return output_folder

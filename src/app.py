@@ -38,14 +38,12 @@ def index():
         if 'split' in request.form:
             print("Split form submitted")
             split_pdf(UPLOAD_FOLDER, OUTPUT_FOLDER)
-            clear_folder(UPLOAD_FOLDER)
             return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
 
         # If it's a pdf merging form
         elif 'merge' in request.form:
             print("Merge form submitted")
             merge_pdfs(UPLOAD_FOLDER, OUTPUT_FOLDER)
-            clear_folder(UPLOAD_FOLDER)
             return redirect(url_for('index', files=os.listdir(OUTPUT_FOLDER)))
 
     return render_template('index.html', files=os.listdir(OUTPUT_FOLDER))

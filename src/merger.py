@@ -23,4 +23,5 @@ def merge_pdfs(input_folder, output_folder):
     # Write the merger into the resulting pdf
     writer.write(output_file_path)
     writer.close()
+    clear_folder(input_folder)
     return output_file_path
