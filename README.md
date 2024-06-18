@@ -52,9 +52,9 @@ To run this project locally, follow these steps:
 
 # TODO List
 * ## _General Tasks:_
-  - [ :heavy_check_mark: ] Implement PyTest for testing.
-  - [x] Initial web interface setup.
-  - [x] Basic file upload functionality.
+  - [:heavy_check_mark:] Implement PyTest for testing.
+  - [:heavy_check_mark:] Initial web interface setup.
+  - [:heavy_check_mark:] Basic file upload functionality.
   - [ ] Develop a front-end interface.
   - [ ] Enable dragging files from the desktop to the web interface.
   - [ ] Display uploaded files as icons, rather than file names.
