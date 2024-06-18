@@ -52,7 +52,7 @@ To run this project locally, follow these steps:
 
 # TODO List
 * ## _General Tasks:_
-  - [x] Implement PyTest for testing.
+  - [ :heavy_check_mark: ] Implement PyTest for testing.
   - [x] Initial web interface setup.
   - [x] Basic file upload functionality.
   - [ ] Develop a front-end interface.
